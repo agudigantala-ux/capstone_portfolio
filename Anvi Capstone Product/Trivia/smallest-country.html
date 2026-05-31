@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .my-button {
+            background-color: #191970;
+            color: white;
+            padding: 6px 10px;
+            border-style: solid;
+            border-color: black;
+            border-radius: 5px;
+            font-size: 16px;
+            display: inline-flex;
+            flex-direction: column;
+        }
+        li {
+            margin: 5px;
+            }
+    </style>
+    <title>Trivia</title>
+</head>
+<body>
+    <h1>What is the smallest country in the world?</h1>
+    <ul>
+        <li>
+            <button class="my-button">Vatican City</button>
+        </li>
+        <li>
+            <button class="my-button">Monaco</button>
+        </li>
+        <li>
+            <button class="my-button">Nauru</button>
+        </li>
+        <li>
+            <button class="my-button">Tuvalu</button>
+        </li>
+        <li>Score: <span class="score"></span>/12</li>
+    </ul>
+    <script>
+        const buttons = document.querySelectorAll('.my-button');
+        let score = Number(localStorage.getItem('score'));
+        let scoreElement = document.querySelector('.score');
+        scoreElement.textContent = score;
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                if (button.textContent === 'Vatican City') {
+                    alert('Correct!');
+                    score++;
+                    scoreElement.textContent = score;
+                    localStorage.setItem('score', score);
+                    window.location.href="soap-food.html";
+                } else {
+                    alert('Incorrect. The correct answer is Vatican City.');
+                    scoreElement.textContent = score;
+                    localStorage.setItem('score', score);
+                    window.location.href = "soap-food.html";
+                };
+            });
+        });
+    </script>
+</body>
+</html>

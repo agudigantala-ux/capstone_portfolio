@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+        <style>
+            .my-button {
+            background-color: #191970;
+            color: white;
+            padding: 6px 30px;
+            border-style: solid;
+            border-color: black;
+            border-radius: 5px;
+            font-size: 16px;
+            display: in-line block;
+            }
+            .total {
+            margin-bottom: 15px
+            }
+        </style>
+    </head>
+    <body>
+        <title>Shopping Cart</title>
+        <h1>Shopping Cart</h1>
+        <p class="yourPurchases">Your purchases: </p>
+        <div class="eachItem">
+            </div>
+        <div class="class1 class2 total finalPurchase">Total Purchases</div> 
+        <div class="class1 class2 total finalPrice">Total Price</div>
+        <button class="class1 class2 my-button returnButton">Return to Shopping</button>
+        <button class="class1 class2 my-button checkoutButton">Check Out</button>
+        <script>
+            let listPurchases=JSON.parse(localStorage.getItem("cartData")) || {};
+            let totalPrice=Number(localStorage.getItem("cartTotal")) || 0;
+            let totalPurchase = Number(localStorage.getItem("cartItems")) || 0;
+            let receiptList=document.querySelector(".eachItem")
+            let totalItemsContainer=document.querySelector(".finalPurchase");
+            let totalMoneyContainer=document.querySelector(".finalPrice");
+            let shopping=document.querySelector(".returnButton");
+            let checkout=document.querySelector(".checkoutButton");
+            let header=document.querySelector("h1");
+            function displayReceipt() {
+                receiptList.innerHTML="";
+                for(let itemName in listPurchases) {
+                    let itemDetails=listPurchases[itemName];
+                    let itemTotal=itemDetails.price*itemDetails.quantity;
+                    let listItem=document.createElement("p");
+                    listItem.innerText=`${itemName} x ${itemDetails.quantity} - $${itemTotal}`;
+                    receiptList.appendChild(listItem);
+                };
+            };
+            function displayTotals() {
+                totalItemsContainer.innerHTML=`Total Purchases: ${totalPurchase}`;
+                totalMoneyContainer.innerHTML=`Total Price: $${totalPrice}`;
+            };
+            displayReceipt();
+            displayTotals();
+            shopping.addEventListener("click", function() {
+                localStorage.setItem("cartData", JSON.stringify(listPurchases));
+                localStorage.setItem("cartItems", totalPurchase);
+                localStorage.setItem("cartTotal", totalPrice);
+                window.location.href="Shopping Simulator.html";
+            });
+            checkout.addEventListener("click", function() {
+                header.innerHTML="Thank you for shopping today!"
+                shopping.remove()
+                checkout.remove()
+            });
+        </script>
+    </body>
+</html>

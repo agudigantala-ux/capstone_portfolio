@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .my-button {
+            background-color: #191970;
+            color: white;
+            padding: 6px 10px;
+            border-style: solid;
+            border-color: black;
+            border-radius: 5px;
+            font-size: 16px;
+            display: inline-flex;
+            flex-direction: column;
+        }
+        li {
+            margin: 5px;
+            }
+    </style>
+    <title>Trivia</title>
+</head>
+<body>
+    <h1>Who won Best New Artist at the Grammys this year?</h1>
+    <ul>
+        <li>
+            <button class="my-button">Addison Rae</button>
+        </li>
+        <li>
+            <button class="my-button">Alex Warren</button>
+        </li>
+        <li>
+            <button class="my-button">KATSEYE</button>
+        </li>
+        <li>
+            <button class="my-button">Olivia Dean</button>
+        </li>
+        <li>Score: <span class="score">0</span>/12</li>
+    </ul>
+    <script>
+        const buttons = document.querySelectorAll('.my-button');
+        let score = 0;
+        let scoreElement = document.querySelector('.score');
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                if (button.textContent==='Olivia Dean') {
+                    alert('Correct!');
+                    score++;
+                    scoreElement.textContent = score;
+                    localStorage.setItem('score', score);
+                    window.location.href="smallest-country.html";
+                } else {
+                    alert('Incorrect. The correct answer is Olivia Dean.');
+                    scoreElement.textContent = score;
+                    localStorage.setItem('score', score);
+                    window.location.href="smallest-country.html";
+                };
+            });
+        });
+    </script>
+</body>
+</html>

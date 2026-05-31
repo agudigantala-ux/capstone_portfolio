@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Clothes Shopping Simulator</title>
+        <link rel="stylesheet" href="style.css">
+        <style>
+            .my-button {
+            background-color: #191970;
+            color: white;
+            padding: 6px 30px;
+            border-style: solid;
+            border-color: black;
+            border-radius: 5px;
+            font-size: 16px;
+            display: inline-flex;
+            flex-direction: column;
+            }
+            .checkout {
+            background-color: #191970;
+            color: white;
+            padding: 6px 20px;
+            border-style: solid;
+            border-color: black;
+            border-radius: 5px;
+            font-size: 16px;
+            display: inline-flex;
+            flex-direction: column;
+            }
+            #shop-results {
+            margin: 5px;
+            }
+            p {
+            margin: 5px;
+            }
+            li {
+            margin: 5px;
+            }
+            .image {
+            margin-bottom: 5px;
+            }
+         </style>
+    </head>
+    <body>
+        <h1>Choose one:</h1>
+        <ul>
+            <li>
+               <button class="class1 class2 my-button T-shirt" data-item="T-shirt">
+                  <img src="./Downloads/red-tshirt-mockup-front-back-260nw-2634235449.webp" class="image" alt="Red T-shirt" width="100" height="100">
+                  T-shirt
+                  <p>Price: $30</p>
+               </button>
+            </li>
+            <li>
+                <button class="class1 class2 my-button Sweater" data-item="Sweater">
+                    <img src="Downloads/jumpers-weater-chevron-detail-designed-260nw-2405177945.webp" class="image" width="100" height="100" alt="Sweater">
+                    Sweater
+                    <p>Price: $50</p>
+                </button>
+            </li>
+            <li>
+                <button class="class1 class2 my-button Hoodie" data-item="Hoodie">
+                    <img src="Downloads/360_F_268465079_R4h6MY9I7W3FGpbaabLkNskgM41qd5tu.jpg" class="image" width="100" height="100" alt="Hoodie">
+                    Hoodie
+                    <p>Price: $35</p>
+                </button>
+            </li>
+            <li>
+                <button class="class1 class2 my-button Jeans" data-item="Jeans">
+                    <img src="Downloads/360_F_483255019_m1r1ujM8EOkr8PamCHF85tQ0rHG3Fiqz.jpg" class="image" width="100" height="100" alt="Jeans">
+                    Jeans
+                    <p>Price: $45</p>
+                </button>
+            </li>
+            <li>
+                <button class="class1 class2 my-button Sweatpants" data-item="Sweatpants">
+                    <img src="Downloads/gray-sweatpants-lying-on-white-260nw-2591358677.webp" class="image" width="100" height="100" alt="Sweatpants">
+                    Sweatpants
+                    <p>Price: $25</p>
+                </button>
+            </li>
+            <li>
+                <button class="checkout">Checkout</button>
+            </li>
+        </ul>
+        <ul>
+            <li class="puc" id="shop-results">Purchase Count: </li>
+            <li class="prc" id="shop-results">Price Count: </li>
+        </ul>
+        <script>
+            let addItem=document.querySelectorAll(".my-button");
+            let purchaseCount=document.querySelector(".puc");
+            let priceCount=document.querySelector(".prc");
+            const checkoutButton=document.querySelector(".checkout");
+            const prices={
+                "T-shirt": 30,
+                "Sweater": 50,
+                "Hoodie": 35,
+                "Jeans": 45,
+                "Sweatpants": 25
+            };
+            let listPurchases=JSON.parse(localStorage.getItem("cartData")) || {};
+            let totalPurchase=Number(localStorage.getItem("cartItems")) || 0;
+            let totalPrice=Number(localStorage.getItem("cartTotal")) || 0;
+            addItem.forEach(function(singleButton) {
+                singleButton.addEventListener("click", function() {
+                    totalPurchase+=1;
+                    let clickedItem=singleButton.dataset.item;
+                    totalPrice+=prices[clickedItem];
+                    if(listPurchases[clickedItem]) {
+                        listPurchases[clickedItem].quantity+=1;
+                    } else {
+                        listPurchases[clickedItem]={
+                            price: prices[clickedItem],
+                            quantity: 1
+                        };
+                    };
+                    purchaseCount.innerText=`Purchase Count: ${totalPurchase}`;
+                    priceCount.innerText=`Price Count: $${totalPrice}`;
+                    console.log(listPurchases)
+                });
+            });
+            checkoutButton.addEventListener("click", function() {
+                localStorage.setItem("cartData", JSON.stringify(listPurchases));
+                localStorage.setItem("cartItems", totalPurchase);
+                localStorage.setItem("cartTotal", totalPrice);
+                window.location.href="shopping-cart.html";
+            });
+        </script>
+    </body>
+</html>

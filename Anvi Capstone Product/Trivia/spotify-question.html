@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <style>
+            .my-button {
+                background-color: #191970;
+                color: white;
+                padding: 6px 10px;
+                border-style: solid;
+                border-color: black;
+                border-radius: 5px;
+                font-size: 16px;
+                display: inline-flex;
+                flex-direction: column;
+            }
+            li {
+                margin: 5px;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <title>Trivia</title>
+    </head>
+    <body>
+        <h1>What is the most-streamed song of all time on Spotify?</h1>
+        <ul>
+            <li>
+                <button class="my-button">Shape of You by Ed Sheeran</button>
+            </li>
+            <li>
+                <button class="my-button">Blinding Lights by The Weeknd</button>
+            </li>
+            <li>
+                <button class="my-button">Dance Monkey by Tones and I</button>
+            </li>
+            <li>
+                <button class="my-button">Rockstar by Post Malone</button>
+            </li>
+            <li>Score: <span class="score"></span>/12</li>
+        </ul>
+        <script>
+            const buttons = document.querySelectorAll('.my-button');
+            let score = Number(localStorage.getItem('score'));
+            let scoreElement = document.querySelector('.score');
+            scoreElement.textContent = score;
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    if (button.textContent === 'Blinding Lights by The Weeknd') {
+                        alert('Correct!');
+                        score++;
+                        scoreElement.textContent = score;
+                        localStorage.setItem('score', score);
+                        window.location.href="movie-question.html";
+                    } else {
+                        alert('Incorrect. The correct answer is Blinding Lights by The Weeknd.');
+                        scoreElement.textContent = score;
+                        localStorage.setItem('score', score);
+                        window.location.href = "movie-question.html";
+                    };
+                });
+            });
+        </script>
+    </body>
+</html>

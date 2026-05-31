@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <style>
+            .game-board {
+                display: grid;
+                grid-template-columns: repeat(3, 100px);
+                grid-template-rows: repeat(3, 100px);
+                gap: 5px;
+            }
+            .cell {
+                width: 100px;
+                height: 100px;
+                background-color: #f0f0f0;
+                border: 1px solid #000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 2em;
+                cursor: pointer;
+            }
+            .my-button {
+            background-color: #191970;
+            color: white;
+            padding: 6px 10px;
+            border-style: solid;
+            border-color: black;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+            display: inline-flex;
+            flex-direction: column;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <title>Tic Tac Toe</title>
+    </head>
+    <body>
+        <h1>Tic Tac Toe</h1>
+        <div class="game-board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+        <button class="my-button">Reset Game</button>
+        <script>
+            const cells = document.querySelectorAll('.cell');
+            const resetButton = document.querySelector('.my-button');
+            let currentPlayer = 'X';
+            let otherPlayer = 'O';
+            let gameBoard = ['', '', '', '', '', '', '', '', ''];
+            const dataIndexes = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+            let isGameActive = true;
+            function makeComputerMove() {
+                moveMade = false;
+                while (!moveMade) {
+                    let randomIndex = Math.floor(Math.random() * dataIndexes.length);
+                    if (gameBoard[randomIndex] === '') {
+                        gameBoard[randomIndex] = otherPlayer;
+                        cells[randomIndex].textContent = otherPlayer;
+                        moveMade = true;
+                    };
+                };
+                return;
+            };
+            function checkWinX() {
+                    const winConditions = [
+                        [0, 1, 2],
+                        [3, 4, 5],
+                        [6, 7, 8],
+                        [0, 3, 6],
+                        [1, 4, 7],
+                        [2, 5, 8],
+                        [0, 4, 8],
+                        [2, 4, 6]
+                    ];
+                    for (let condition of winConditions) {
+                        const [a, b, c] = condition;
+                        console.log(gameBoard[a], gameBoard[b], gameBoard[c]);
+                        if (currentPlayer && gameBoard[a] === currentPlayer && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+                            return true;
+                        };
+                    };
+                    return false;
+                };
+            function checkWinO() {
+                    const winConditions = [
+                        [0, 1, 2],
+                        [3, 4, 5],
+                        [6, 7, 8],
+                        [0, 3, 6],
+                        [1, 4, 7],
+                        [2, 5, 8],
+                        [0, 4, 8],
+                        [2, 4, 6]
+                    ];
+                    for (let condition of winConditions) {
+                        const [a, b, c] = condition;
+                        console.log(gameBoard[a], gameBoard[b], gameBoard[c]);
+                        if (otherPlayer && gameBoard[a] === otherPlayer && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+                            return true;
+                        };
+                    };
+                    return false;
+                };
+            function checkDraw() {
+                return !gameBoard.includes('');
+            };
+            for (let cell of cells) {
+                cell.addEventListener("click", function () {
+                    let index = cell.getAttribute('data-index');
+                    if (isGameActive === false || gameBoard[index] !== '') {
+                        console.log(isGameActive);
+                        alert("Game over! Please reset the game to continue.");
+                        return;
+                    } else {
+                        gameBoard[index] = currentPlayer;
+                        cell.textContent = currentPlayer;
+                        if (checkWinX()) {
+                            alert("Player X wins!");
+                            isGameActive = false;
+                            return;
+                        } else if (checkDraw()) {
+                            alert("It's a draw!");
+                            isGameActive = false;
+                            return;
+                        };
+                        makeComputerMove();
+                        if (checkWinO()) {
+                            alert("Player O wins!");
+                            isGameActive = false;
+                            return;
+                        };
+                    };
+                });
+            };
+            resetButton.addEventListener('click', function() {
+                gameBoard = ['', '', '', '', '', '', '', '', ''];
+                for (let cell of cells) {
+                    cell.textContent = '';
+                }
+                isGameActive = true;
+            });
+        </script>
+    </body>
+</html>

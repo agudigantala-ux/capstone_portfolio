@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .my-button {
+            background-color: #191970;
+            color: white;
+            padding: 6px 10px;
+            border-style: solid;
+            border-color: black;
+            border-radius: 5px;
+            font-size: 16px;
+            display: inline-flex;
+            flex-direction: column;
+        }
+    </style>
+    <title>Trivia</title>
+</head>
+<body>
+    <h1>Trivia</h1>
+    <p>Click the start button to begin!</p>
+    <button class="my-button">Start</button>
+    <script>
+        let startButton = document.querySelector(".my-button");
+        startButton.addEventListener("click", function() {
+            window.location.href="grammys-question.html";
+        });
+    </script>
+</body>
+</html>
