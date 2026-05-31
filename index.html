@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+        <style>
+            .my-button {
+            background-color: #191970;
+            color: white;
+            padding: 6px 15px;
+            border-style: solid;
+            border-color: black;
+            border-radius: 5px;
+            font-size: 16px;
+            display: in-line block;
+            }
+            li {
+            margin: 5px;
+            }
+        </style>
+        <title>Homepage</title>
+    </head>
+    <body>
+        <h1>Click a game to play</h1>
+        <ul>
+            <li>
+                <button class="class1 class2 my-button shopsim">Shopping Simulator</button>
+            </li>
+            <li>
+                <button class="class1 class2 my-button trivia">Trivia</button>
+            </li>
+            <li>
+                <button class="class1 class2 my-button tic-tac-toe">Tic Tac Toe</button>
+            </li>
+        </ul>
+        <script>
+            let shopsimButton=document.querySelector(".shopsim");
+            shopsimButton.addEventListener("click", function() {
+                window.location.href="Shopping Simulator.html";
+            });
+            let triviaButton=document.querySelector(".trivia");
+            triviaButton.addEventListener("click", function() {
+                window.location.href="Trivia/trivia-home.html";
+            });
+            let ticTacToeButton=document.querySelector(".tic-tac-toe");
+            ticTacToeButton.addEventListener("click", function() {
+                window.location.href="tic-tac-toe.html";
+            });
+        </script>
+    </body>
+</html>

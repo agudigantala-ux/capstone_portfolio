@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <style>
+            .my-button {
+                background-color: #191970;
+                color: white;
+                padding: 6px 10px;
+                border-style: solid;
+                border-color: black;
+                border-radius: 5px;
+                font-size: 16px;
+                display: inline-flex;
+                flex-direction: column;
+            }
+            li {
+                margin: 5px;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <title>Trivia</title>
+    </head>
+    <body>
+        <h1>Which US state has the most active volcanoes?</h1>
+        <ul>
+            <li>
+                <button class="my-button">California</button>
+            </li>
+            <li>
+                <button class="my-button">Hawaii</button>
+            </li>
+            <li>
+                <button class="my-button">Alaska</button>
+            </li>
+            <li>
+                <button class="my-button">Washington</button>
+            </li>
+            <li>Score: <span class="score"></span>/12</li>
+        </ul>
+        <script>
+            const buttons = document.querySelectorAll('.my-button');
+            let score = Number(localStorage.getItem('score'));
+            let scoreElement = document.querySelector('.score');
+            scoreElement.textContent = score;
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (button.textContent === 'Alaska') {
+                        alert('Correct!');
+                        score++;
+                        scoreElement.textContent = score;
+                        localStorage.setItem('score', score);
+                        window.location.href="drink-question.html";
+                    } else {
+                        alert('Incorrect. The correct answer is Alaska.');
+                        scoreElement.textContent = score;
+                        localStorage.setItem('score', score);
+                        window.location.href = "drink-question.html";
+                    };
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .my-button {
+            background-color: #191970;
+            color: white;
+            padding: 6px 10px;
+            border-style: solid;
+            border-color: black;
+            border-radius: 5px;
+            font-size: 16px;
+            display: inline-flex;
+            flex-direction: column;
+        }
+        li {
+            margin: 5px;
+            }
+    </style>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>What is the highest-grossing movie of all time?</h1>
+    <ul>
+        <li>
+            <button class="my-button">Avatar</button>
+        </li>
+        <li>
+            <button class="my-button">Avengers: Endgame</button>
+        </li>
+        <li>
+            <button class="my-button">Titanic</button>
+        </li>
+        <li>
+            <button class="my-button">Star Wars: The Force Awakens</button>
+        </li>
+        <li>Score: <span class="score"></span>/12</li>
+    </ul>
+    <script>
+        const buttons = document.querySelectorAll('.my-button');
+        let score = Number(localStorage.getItem('score'));
+        let scoreElement = document.querySelector('.score');
+        scoreElement.textContent = score;
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (button.textContent === 'Avatar') {
+                    alert('Correct!');
+                    score++;
+                    scoreElement.textContent = score;
+                    localStorage.setItem('score', score);
+                    window.location.href="mountain-question.html";
+                } else {
+                    alert('Incorrect. The correct answer is Avatar.');
+                    scoreElement.textContent = score;
+                    localStorage.setItem('score', score);
+                    window.location.href = "mountain-question.html";
+                };
+            });
+        });
+    </script>
+</body>
+</html>

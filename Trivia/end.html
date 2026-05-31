@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Trivia</title>
+</head>
+<body>
+    <h1>Game Over</h1>
+    <p>Your final score is: <span class="score"></span>/12</p>
+    <script>
+        let score = Number(localStorage.getItem('score'));
+        let scoreElement = document.querySelector('.score');
+        scoreElement.textContent = score;
+    </script>
+</body>
+</html>
